@@ -7,67 +7,6 @@ from typing import Optional
 from google.auth import credentials as auth_credentials
 from google.cloud import aiplatform
 
-"""def init_sample(
-    key: str,
-    project_id: str,
-    location: str,
-    experiment: Optional[str] = None,
-    staging_bucket: Optional[str] = None,
-    credentials: Optional[auth_credentials.Credentials] = None,
-    encryption_spec_key_name: Optional[str] = None,
-    service_account: Optional[str] = None,
-):
-
-    # Initialize Google Cloud AI Platform
-    aiplatform.init(
-        project=project_id,
-        location=location,
-        experiment=experiment,
-        staging_bucket=staging_bucket,
-        credentials=credentials,
-        encryption_spec_key_name=encryption_spec_key_name,
-        service_account=service_account,
-    )
-
-# Set the variable values
-key = "AIzaSyAJUPEhqdg6RghMoEI_z9svfxPu1Z_T0tg"
-project_id = "metal-filament-420017"
-location = "asia-south1"
-
-# Call the function with the variable values
-init_sample(key, project_id, location)
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part, FinishReason
-import vertexai.preview.generative_models as generative_models
-def gemini(pii_type,i):
-    button_key = f"generate_button_{i}"
-    def generate(text1): 
-        vertexai.init(project="metal-filament-420017", location="asia-south1")
-        model = generative_models.GenerativeModel("gemini-1.0-pro-001")
-        
-        generation_config = {
-            "max_output_tokens": 1000,
-            "temperature": 0.8,
-            "top_p": 0.4,
-            "top_k": 5,
-        }
-
-        safety_settings = {
-            generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-        }
-                
-        responses = model.generate_content(
-            [text1],
-            generation_config=generation_config,
-            safety_settings=safety_settings,
-            stream=True,
-        )
-         
-        return responses    
-"""
 #------------------------------------------------------------------------------------------------------------
 key = "a4aded933c7e444899170460bddf323f"
 endpoint = "https://pii-detection-rakshisu.cognitiveservices.azure.com/"
