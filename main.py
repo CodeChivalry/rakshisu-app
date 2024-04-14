@@ -77,7 +77,7 @@ def gemini(pii_type,i):
         elif pii_type == "PhoneNumber":
             text1 = """Provide a general reason that necessitates the masking of phone number of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
         elif pii_type == "Organization":
-            text1 = """Provide a general reason that necessitates the masking of district of victim's residential address.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+            text1 = """Provide a general reason that necessitates the masking of district of victim residential address.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
         elif pii_type == "Address":
             text1 = """Provide a general reason that necessitates the masking of house address of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
         elif pii_type == "Email":
