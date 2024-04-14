@@ -255,7 +255,7 @@ def process_rowdy_sheeter_data(rowdy_sheeter_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         #index_name = rowdy_sheeter_df.index[0]
         index_name = rowdy_sheeter_df.index[0]
@@ -530,7 +530,7 @@ def process_accused_data(accused_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = accused_df.index[0]
         pdf.cell(200,10,txt="Sheet: Accused Data Details",align='C',ln=True)
@@ -872,7 +872,7 @@ def process_accident_reports_data(accident_reports_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = accident_reports_df.index[0]
         pdf.cell(200,10,txt="Sheet: Accident Report Details",align='C',ln=True)
@@ -1241,7 +1241,7 @@ def process_fir_details_data(fir_details_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = fir_details_df.index[0]
         pdf.cell(200,10,txt="Sheet: FIR Data Details",align='C',ln=True)
@@ -1515,7 +1515,7 @@ def process_complainant_details_data(complainant_details_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = complainant_details_df.index[0]
         pdf.cell(200,10,txt="Sheet: Complainant Details",align='C',ln=True)
@@ -1798,7 +1798,7 @@ def process_victim_info_data(victim_info_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = victim_info_df.index[0]
         pdf.cell(200,10,txt="Sheet: Victim Info Details",align='C',ln=True)
@@ -2031,7 +2031,7 @@ def process_charge_sheeted_data(charge_sheeted_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = charge_sheeted_df.index[0]
         pdf.cell(200,10,txt="Sheet: Charge Sheeted Details",align='C',ln=True)
@@ -2309,7 +2309,7 @@ def process_arrest_person_data(arrest_person_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = arrest_person_df.index[0]
         pdf.cell(200,10,txt="Sheet: Arrest Person Details",align='C',ln=True)
@@ -2632,7 +2632,7 @@ def process_mob_data(mob_df):
     def generate_pdf(all_masked_values, file_name):
         pdf = FPDF()
         pdf.add_page()
-        pdf.add_font('NotoSansKannada', '','/Users/MEHAK SHARMA/Documents/KSP HACK/NotoSansKannada_Condensed-Black.ttf', uni=True)
+        pdf.add_font('NotoSansKannada', '','NotoSansKannada_CondensedBlack.ttf', uni=True)
         pdf.set_font('NotoSansKannada', size=12)
         index_name = mob_df.index[0]
         pdf.cell(200,10,txt="Sheet: MOBs Details",align='C',ln=True)
