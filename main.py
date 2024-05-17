@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 import streamlit as st
 import numpy as np
@@ -7,13 +6,7 @@ import base64
 from typing import Optional
 from google.auth import credentials as auth_credentials
 from google.cloud import aiplatform
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part, FinishReason
-import vertexai.preview.generative_models as generative_models
-import asyncio
-
-# Asynchronous initialization function for Google Cloud AI Platform
-async def init_sample(
+def init_sample(
     key: str,
     project_id: str,
     location: str,
@@ -23,6 +16,8 @@ async def init_sample(
     encryption_spec_key_name: Optional[str] = None,
     service_account: Optional[str] = None,
 ):
+
+    # Initialize Google Cloud AI Platform
     aiplatform.init(
         project=project_id,
         location=location,
@@ -33,65 +28,73 @@ async def init_sample(
         service_account=service_account,
     )
 
-# Asynchronous function to generate content using vertexai
-async def generate_async(text1):
-    vertexai.init(project="metal-filament-420017", location="asia-south1")
-    model = generative_models.GenerativeModel("gemini-1.0-pro-001")
-    
-    generation_config = {
-        "max_output_tokens": 1000,
-        "temperature": 0.8,
-        "top_p": 0.4,
-        "top_k": 5,
-    }
+# Set the variable values
+key = "AIzaSyAJUPEhqdg6RghMoEI_z9svfxPu1Z_T0tg"
+project_id = "metal-filament-420017"
+location = "asia-south1"
 
-    safety_settings = {
-        generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-        generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-        generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-        generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-    }
-
-    responses = await model.generate_content(
-        [text1],
-        generation_config=generation_config,
-        safety_settings=safety_settings,
-        stream=True,
-    )
-    
-    return responses
-
-# Function to handle PII type and generate guidelines
-def gemini(pii_type, i):
+# Call the function with the variable values
+init_sample(key, project_id, location)
+import vertexai
+from vertexai.generative_models import GenerativeModel, Part, FinishReason
+import vertexai.preview.generative_models as generative_models
+def gemini(pii_type,i):
     button_key = f"generate_button_{i}"
-    
-    async def on_button_click():
-        # Ensure the initialization has completed
-        await initialization_complete
+    def generate(text1): 
+        vertexai.init(project="metal-filament-420017", location="asia-south1")
+        model = generative_models.GenerativeModel("gemini-1.0-pro-001")
         
-        text1 = {
-            "Person": "Provide a general reason that necessitates the masking of name of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "PersonType": "Provide a general reason that necessitates the masking of job designation of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "PhoneNumber": "Provide a general reason that necessitates the masking of phone number of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "Organization": "Provide a general reason that necessitates the masking of district of victim's residential address. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "Address": "Provide a general reason that necessitates the masking of house address of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "Email": "Provide a general reason that necessitates the masking of email ID of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "IPAddress": "Provide a general reason that necessitates the masking of IPAddress. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "DateTime": "Provide a general reason that necessitates the masking of date and time of registration of complaint by victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "Quantity": "Provide a general reason that necessitates the masking of job designation of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
-            "International Banking Account Number (IBAN)": "Provide a general reason that necessitates the masking of any banking credentials like credit card or debit card of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."
-        }.get(pii_type, None)
-        
-        if not text1:
+        generation_config = {
+            "max_output_tokens": 1000,
+            "temperature": 0.8,
+            "top_p": 0.4,
+            "top_k": 5,
+        }
+
+        safety_settings = {
+            generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+            generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+            generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+            generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        }
+                
+        responses = model.generate_content(
+            [text1],
+            generation_config=generation_config,
+            safety_settings=safety_settings,
+            stream=True,
+        )
+         
+        return responses    
+    # Button to generate response
+    if st.button("Guidelines for PII Redaction", key=button_key):
+        # Call the generate function with appropriate text1 value
+        if pii_type == "Person":
+            text1 = """Provide a general reason that necessitates the masking of name of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "PersonType":
+            text1 = """Provide a general reason that necessitates the masking of job designation of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "PhoneNumber":
+            text1 = """Provide a general reason that necessitates the masking of phone number of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "Organization":
+            text1 = """Provide a general reason that necessitates the masking of district of victim's residential address.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "Address":
+            text1 = """Provide a general reason that necessitates the masking of house address of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "Email":
+            text1 = """Provide a general reason that necessitates the masking of email ID of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "IPAddress":
+            text1 = """Provide a general reason that necessitates the masking of IPAddress.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "DateTime":
+            text1 = """Provide a general reason that necessitates the masking of date and time of registration of complaint by victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "Quantity":
+            text1 = """Provide a general reason that necessitates the masking of job designation of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "International Banking Account Number (IBAN)":
+            text1 = """Provide a general reason that necessitates the masking of any banking credentials like credit card or debit card of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        else:
             st.error("Invalid PII type selected.")
-            return
-        
-        result = await generate_async(text1)
+            return        
+        result=generate(text1)
         for word in result:
             st.text(word.text)
-
-    if st.button("Guidelines for PII Redaction", key=button_key):
-        asyncio.run(on_button_click())
 
 #------------------------------------------------------------------------------------------------------------
 azure_key = os.environ['AZURE_KEY']
@@ -3235,18 +3238,4 @@ def main():
     file_types[selected_file_type]()
 
 if __name__ == "__main__":
-    # Initialize the event loop
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
-    # Define an async function to ensure initialization completes
-    async def main():
-        global initialization_complete
-        initialization_complete = asyncio.create_task(init_sample(
-            key=os.environ.get('GEMINI_KEY'),
-            project_id=os.environ.get('GEMINI_PROJECT_ID'),
-            location=os.environ.get('GEMINI_LOCATION')
-        ))
-        await initialization_complete
-    
-    loop.run_until_complete(main())
+    main()
