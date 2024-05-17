@@ -12,8 +12,8 @@ from vertexai.generative_models import GenerativeModel, Part, FinishReason
 import vertexai.preview.generative_models as generative_models
 import asyncio
 
-# Initialize Google Cloud AI Platform
-def init_sample(
+# Asynchronous initialization function for Google Cloud AI Platform
+async def init_sample(
     key: str,
     project_id: str,
     location: str,
@@ -33,14 +33,7 @@ def init_sample(
         service_account=service_account,
     )
 
-# Set environment variables
-project_id = os.environ.get('GEMINI_PROJECT_ID')
-location = os.environ.get('GEMINI_LOCATION')
-key = os.environ.get('GEMINI_KEY')
-
-# Call the initialization function with the variable values
-init_sample(key, project_id, location)
-
+# Asynchronous function to generate content using vertexai
 async def generate_async(text1):
     vertexai.init(project="metal-filament-420017", location="asia-south1")
     model = generative_models.GenerativeModel("gemini-1.0-pro-001")
@@ -68,10 +61,14 @@ async def generate_async(text1):
     
     return responses
 
+# Function to handle PII type and generate guidelines
 def gemini(pii_type, i):
     button_key = f"generate_button_{i}"
     
     async def on_button_click():
+        # Ensure the initialization has completed
+        await initialization_complete
+        
         text1 = {
             "Person": "Provide a general reason that necessitates the masking of name of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
             "PersonType": "Provide a general reason that necessitates the masking of job designation of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list.",
@@ -3238,4 +3235,18 @@ def main():
     file_types[selected_file_type]()
 
 if __name__ == "__main__":
-    main()
+    # Initialize the event loop
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
+    # Define an async function to ensure initialization completes
+    async def main():
+        global initialization_complete
+        initialization_complete = asyncio.create_task(init_sample(
+            key=os.environ.get('GEMINI_KEY'),
+            project_id=os.environ.get('GEMINI_PROJECT_ID'),
+            location=os.environ.get('GEMINI_LOCATION')
+        ))
+        await initialization_complete
+    
+    loop.run_until_complete(main())
