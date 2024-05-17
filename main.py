@@ -28,10 +28,9 @@ def init_sample(
         service_account=service_account,
     )
 
-# Set the variable values
-key = "AIzaSyAJUPEhqdg6RghMoEI_z9svfxPu1Z_T0tg"
-project_id = "metal-filament-420017"
-location = "asia-south1"
+project_id = os.environ['GEMINI_PROJECT_ID']
+location = os.environ['GEMINI_LOCATION']
+key = os.environ['GEMINI_KEY']
 
 # Call the function with the variable values
 init_sample(key, project_id, location)
@@ -96,8 +95,9 @@ def gemini(pii_type,i):
         for word in result:
             st.text(word.text)
 #------------------------------------------------------------------------------------------------------------
-key = "a4aded933c7e444899170460bddf323f"
-endpoint = "https://pii-detection-rakshisu.cognitiveservices.azure.com/"
+azure_key = os.environ['AZURE_KEY']
+azure_endpoint = os.environ['AZURE_ENDPOINT']
+azure_location = os.environ['AZURE_LOCATION']
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
 
