@@ -31,7 +31,7 @@ def init_sample(
 
 project_id = os.environ['GEMINI_PROJECT_ID']
 location = os.environ['GEMINI_LOCATION']
-key = os.environ['GEMINI_KEY'
+key = os.environ['GEMINI_KEY']
 
 # Call the function with the variable values
 init_sample(key, project_id, location)
