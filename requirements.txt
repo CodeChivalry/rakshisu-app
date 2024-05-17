@@ -26,3 +26,4 @@ responses==0.18.0
 streamlit==1.23.1
 google-cloud-aiplatform==1.51.0
 vertexai==0.0.1
+fpdf==1.7.2
