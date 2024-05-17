@@ -103,10 +103,11 @@ from azure.core.credentials import AzureKeyCredential
 
 # Authenticate the client using your key and endpoint 
 def authenticate_client():
-    ta_credential = AzureKeyCredential(key)
+    ta_credential = AzureKeyCredential(azure_key)
     text_analytics_client = TextAnalyticsClient(
-            endpoint=endpoint, 
-            credential=ta_credential)
+            endpoint=azure_endpoint, 
+            credential=ta_credential,
+            location=azure_location)  
     return text_analytics_client
 
 
