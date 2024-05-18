@@ -96,6 +96,19 @@ def gemini(pii_type, i):
         elif pii_type == "Email":
             text1 = """Provide a general reason that necessitates the masking of email ID of victim. Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
         elif pii_type == "IPAddress":
+            text1 = """Provide a general reason that necessitates the masking of IPAddress.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "DateTime":
+            text1 = """Provide a general reason that necessitates the masking of date and time of registration of complaint by victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "Quantity":
+            text1 = """Provide a general reason that necessitates the masking of job designation of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        elif pii_type == "International Banking Account Number (IBAN)":
+            text1 = """Provide a general reason that necessitates the masking of any banking credentials like credit card or debit card of victim.  Also cite any one legal law under the Indian Judicial System that supports it. Do not use markdown language. Use numbered list."""
+        else:
+            st.error("Invalid PII type selected.")
+            return        
+        result=generate(text1)
+        for word in result:
+            st.text(word.text)
 
 
 
