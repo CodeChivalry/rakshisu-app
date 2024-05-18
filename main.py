@@ -24,35 +24,27 @@ google_configure(
     client_options={"api_endpoint": "https://asia-south1-aiplatform.googleapis.com"}
 )
 
-# Initialize Vertex AI
-client_options = ClientOptions(api_key=key, api_endpoint="https://asia-south1-aiplatform.googleapis.com")
-vertexai.init(project=project_id, location=location, client_options=client_options)
-
-def init_sample(
-    key: str,
-    project_id: str,
-    location: str,
-    experiment: Optional[str] = None,
-    staging_bucket: Optional[str] = None,
-    credentials: Optional[auth_credentials.Credentials] = None,
-    encryption_spec_key_name: Optional[str] = None,
-    service_account: Optional[str] = None,
-):
+# Define function for initialization
+def initialize_vertex_ai():
+    # Initialize Vertex AI
+    client_options = ClientOptions(api_key=key, api_endpoint="https://asia-south1-aiplatform.googleapis.com")
+    vertexai.init(project=project_id, location=location, client_options=client_options)
 
     # Initialize Google Cloud AI Platform
     aiplatform.init(
         project=project_id,
         location=location,
-        experiment=experiment,
-        staging_bucket=staging_bucket,
-        credentials=credentials,
-        encryption_spec_key_name=encryption_spec_key_name,
-        service_account=service_account,
+        experiment=None,
+        staging_bucket=None,
+        credentials=None,
+        encryption_spec_key_name=None,
+        service_account=None,
     )
 
-# Call the function with the variable values
-init_sample(key, project_id, location)
+# Call the configuration function
+initialize_vertex_ai()
 
+# Define gemini function
 def gemini(pii_type, i):
     button_key = f"generate_button_{i}"
 
