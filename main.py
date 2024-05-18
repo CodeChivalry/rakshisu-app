@@ -7,6 +7,7 @@ import base64
 from typing import Optional, Sequence, Tuple
 from google.auth import credentials as auth_credentials
 from google.cloud import aiplatform
+from google.api_core.client_options import ClientOptions
 from google.generativeai import configure as google_configure
 import vertexai
 from vertexai.generative_models import GenerativeModel, Part, FinishReason
