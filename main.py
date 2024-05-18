@@ -24,6 +24,10 @@ google_configure(
     client_options={"api_endpoint": "https://asia-south1-aiplatform.googleapis.com"}
 )
 
+# Initialize Vertex AI
+client_options = ClientOptions(api_key=key, api_endpoint="https://asia-south1-aiplatform.googleapis.com")
+vertexai.init(project=project_id, location=location, client_options=client_options)
+
 def init_sample(
     key: str,
     project_id: str,
@@ -52,10 +56,7 @@ init_sample(key, project_id, location)
 def gemini(pii_type, i):
     button_key = f"generate_button_{i}"
 
-    def generate(text1): 
-        client_options = ClientOptions(api_key=key, api_endpoint="https://asia-south1-aiplatform.googleapis.com")
-        vertexai.init(project=project_id, location=location, client_options=client_options)
-        
+    def generate(text1):        
         model = generative_models.GenerativeModel("gemini-1.0-pro-001")
         
         generation_config = {
@@ -110,6 +111,7 @@ def gemini(pii_type, i):
         result=generate(text1)
         for word in result:
             st.text(word.text)
+
 
 
 
