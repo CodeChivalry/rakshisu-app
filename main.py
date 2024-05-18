@@ -11,7 +11,10 @@ from google.generativeai import configure as google_configure
 import vertexai
 from vertexai.generative_models import GenerativeModel, Part, FinishReason
 import vertexai.preview.generative_models as generative_models
-
+# Set the variable values
+project_id = os.environ['GEMINI_PROJECT_ID']
+location = os.environ['GEMINI_LOCATION']
+key = os.environ['GEMINI_KEY']
 # Configure the Google Generative AI
 google_configure(
     api_key=key,
@@ -40,10 +43,7 @@ def init_sample(
         service_account=service_account,
     )
 
-# Set the variable values
-project_id = os.environ['GEMINI_PROJECT_ID']
-location = os.environ['GEMINI_LOCATION']
-key = os.environ['GEMINI_KEY']
+
 
 # Call the function with the variable values
 init_sample(key, project_id, location)
