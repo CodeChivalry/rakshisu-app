@@ -4,9 +4,20 @@ import streamlit as st
 import numpy as np
 import time
 import base64
-from typing import Optional
+from typing import Optional, Sequence, Tuple
 from google.auth import credentials as auth_credentials
 from google.cloud import aiplatform
+from google.generativeai import configure as google_configure
+import vertexai
+from vertexai.generative_models import GenerativeModel, Part, FinishReason
+import vertexai.preview.generative_models as generative_models
+
+# Configure the Google Generative AI
+google_configure(
+    api_key=key,
+    client_options={"api_endpoint": "https://asia-south1-aiplatform.googleapis.com"}
+)
+
 def init_sample(
     key: str,
     project_id: str,
@@ -29,16 +40,15 @@ def init_sample(
         service_account=service_account,
     )
 
+# Set the variable values
 project_id = os.environ['GEMINI_PROJECT_ID']
 location = os.environ['GEMINI_LOCATION']
 key = os.environ['GEMINI_KEY']
 
 # Call the function with the variable values
 init_sample(key, project_id, location)
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part, FinishReason
-import vertexai.preview.generative_models as generative_models
-def gemini(pii_type,i):
+
+def gemini(pii_type, i):
     button_key = f"generate_button_{i}"
     def generate(text1): 
         vertexai.init(project="metal-filament-420017", location="asia-south1")
@@ -66,6 +76,7 @@ def gemini(pii_type,i):
         )
          
         return responses    
+
     # Button to generate response
     if st.button("Guidelines for PII Redaction", key=button_key):
         # Call the generate function with appropriate text1 value
@@ -92,9 +103,10 @@ def gemini(pii_type,i):
         else:
             st.error("Invalid PII type selected.")
             return        
-        result=generate(text1)
+        result = generate(text1)
         for word in result:
             st.text(word.text)
+
 
 #------------------------------------------------------------------------------------------------------------
 azure_key = os.environ['AZURE_KEY']
