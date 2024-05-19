@@ -11,6 +11,7 @@ Rakshisu is a tool that identifies Personally Identifiable Information (PII) in 
 5) <b>Guidelines for PII</b>: Gemini model displays ethical and legal reasons to help police officers in making a decision whether to mask or not mask the information identified as PII
 6) <b>Action Menu</b>: Dropdown menu enabling users to choose "Yes" or "No" to mask or not mask detected PII values.
 7) <b>PDF Generation</b>: Provides a downloadable PDF link containing sheet name, row number, and corresponding PII detected values (masked/not masked), along with their titles.
+8) Our <b>Streamlit app</b> integrated with <b>Gemini Pro</b> is deployed on <b>Google Cloud Run</b>, which uses <b>Docker Container</b>. This makes our app <b>highly scalable</b> across different devices and systems.
 
 <h2>Methodology:</h2>
 
